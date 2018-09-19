@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hmdb.taskmongo.mysql.dao.UserMapper" >
+
+    <resultMap type="Menu" id="menuResultMap">
+        <id column="MENU_ID" property="MENU_ID"/>
+        <result column="MENU_NAME" property="MENU_NAME"/>
+        <result column="MENU_URL" property="MENU_URL"/>
+        <result column="PARENT_ID" property="PARENT_ID"/>
+        <result column="MENU_ORDER" property="MENU_ORDER"/>
+        <result column="MENU_ICON" property="MENU_ICON"/>
+        <result column="MENU_TYPE" property="MENU_TYPE"/>
+        <result column="MENU_NO" property="MENU_NO"/>
+    </resultMap>
+    <!-- 查询目录 -->
+    <select id="listAllParentMenu" resultMap="menuResultMap">
+        select * from MENU
+        where PARENT_ID = '0'  order by CAST(MENU_ORDER as SIGNED) asc
+    </select>
+<!--
+    <resultMap id="BaseResultMap" type="com.neo.entity.UserEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="userName" property="userName" jdbcType="VARCHAR" />
+        <result column="passWord" property="passWord" jdbcType="VARCHAR" />
+        <result column="user_sex" property="userSex" javaType="com.neo.enums.UserSexEnum"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, userName, passWord, user_sex, nick_name
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap"  >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM users
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM users
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.neo.entity.UserEntity" >
+        INSERT INTO
+        users
+        (userName,passWord,user_sex)
+        VALUES
+        (#{userName}, #{passWord}, #{userSex})
+    </insert>
+
+    <update id="update" parameterType="com.neo.entity.UserEntity" >
+        UPDATE
+        users
+        SET
+        <if test="userName != null">userName = #{userName},</if>
+        <if test="passWord != null">passWord = #{passWord},</if>
+        nick_name = #{nickName}
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long" >
+        DELETE FROM
+        users
+        WHERE
+        id =#{id}
+    </delete>
+    -->
+</mapper>
